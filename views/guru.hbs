@@ -1,0 +1,127 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Portal Guru</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+
+			font-family: 'CourierNew', Courier, monospace;
+		}
+
+		body {
+			height: 100vh;
+		}
+
+		.container {
+			width: 100vw;
+			padding-inline: 20vw;
+			display: grid;
+			place-items: center;
+			gap: 1rem;
+		}
+
+		h2 {
+			margin-top: 2rem
+		}
+
+		#siswa {
+			font-family: Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#siswa td,
+		#siswa th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#siswa th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+		}
+
+		a:link,
+		a:visited {
+			background-color: transparent;
+			color: black;
+			border: 2px solid black;
+			padding: 10px 20px;
+			text-align:
+				center;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		a:hover,
+		a:active {
+			background-color: black;
+			color: white;
+		}
+		#back:hover, #back:active {
+			background-color: white;
+			color: rgb(182, 41, 41);
+			font-weight: bold;
+		}
+		#back{
+			border: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2>Absen Basis Web</h2>
+		<h3>Portal Guru</h3>
+		<a href="/guru/mulai">Mulai Baru</a>
+		<a href="/guru"> &#8634; Refresh</a>
+		<a id="back" href="/"> &#60; Back</a>
+		<h4>Daftar Siswa</h4>
+		<table id="siswa">
+			<thead>
+				<tr>
+					<th style="text-align: left;">Nis</th>
+					<th style="text-align: left;">Nama</th>
+					<th style="text-align: left;">Status Absen</th>
+					<th style="text-align: center;">Lokasi</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each results}}
+				<tr>
+					<td>{{ NIS }}</td>
+					<td>{{ Nama }}</td>
+					<td style="text-align: center;">
+						{{#if Status_absen}}
+						&#10003;
+						{{else}}
+						&#10005;
+						{{/if}}
+					</td>
+					<td style="text-align: center;">
+						<a href="{{ lokasi }}" target="_blank">Lokasi</a>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+
+		</table>
+	</div>
+</body>
+<script>
+	var url_string = window.location.href
+	var url = new URL(url_string);
+	var alertt = url.searchParams.get("alert");
+	if (alertt != null) {
+		alert(alertt);
+		location.replace("/guru");
+	}
+</script>
+
+</html>
